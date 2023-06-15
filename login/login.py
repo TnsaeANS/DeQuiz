@@ -29,6 +29,7 @@ cur.execute("""
     )
 """)
 
+
 def register():
     # Get the values entered by the user in the GUI entry fields
     fullname = fullname_entry.get()

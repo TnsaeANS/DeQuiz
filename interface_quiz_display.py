@@ -5,10 +5,14 @@ from question_model import Question
 
 from tkinter import messagebox
 
-#from data.py
+#from data.py - deprecated
 from data import question_data
 
+
+import os
 import json
+
+# NEW Source of Quiz Data
 with open('quiz_data.json', 'r') as f:
     quiz_data = json.load(f)
 
@@ -57,9 +61,11 @@ class MyQz:
         def dropdown_callback(*args):
             print("Selected option:", dropdown_var.get())
 
+        quiz_choices = ["Option 1", "Option 2", "Option 3"];
+
         # Create the drop-down menu and add it to the dropdown frame
         dropdown = ctk.CTkOptionMenu(dropdown_frame, variable=dropdown_var, command=dropdown_callback,
-                                    values=["Option 1", "Option 2", "Option 3"])
+                                    values=quiz_choices)
         dropdown.pack(side='left', padx=10, pady=10) 
 
 
@@ -119,7 +125,7 @@ class MyQz:
 
 
         def confirm():
-            answer = askyesno(title='confirmation',
+            answer = askyesno(title='Exit Confirmation?',
                             message='Are you sure that you want to quit?')
             if answer:
                 self.root.destroy()
@@ -187,7 +193,7 @@ class MyQz:
                     self.choice_letter = [0, "A", "B", "C", "D"]
                     if question_data[i]["answer"] ==  self.user_choices[i]:
                         self.score += 1
-                messagebox.showinfo("Error", f"Your Score is {self.score}")
+                messagebox.showinfo("Complete", f"Your Score is {self.score}")
                 break
         
 
