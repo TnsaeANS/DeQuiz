@@ -3,6 +3,7 @@ import customtkinter as ctk
 from class_quiz_parser import MultipleChoiceParser
 
 import json
+import os
 
 
 ctk.set_appearance_mode("system")
@@ -59,8 +60,12 @@ def save_quiz():
 
     current_question_data = MultipleChoiceParser(quiz_text_value,quiz_title_value).question_data
 
-    print(current_question_data);
-    with open('quiz_data.json', 'w') as f:
+    if not os.path.exists('quizzes'):
+        os.makedirs('quizzes')
+    
+    file_path = os.path.join('quizzes', f'{quiz_title_value}.json')
+
+    with open(file_path, 'w') as f:
         json.dump(current_question_data, f)
 
     

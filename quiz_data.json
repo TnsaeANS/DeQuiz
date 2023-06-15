@@ -1,26 +1,35 @@
 [
     {
-        "title": "Mira"
+        "title": "Appliances"
     },
     {
-        "stem": "1. What is the capital of France?B ",
+        "stem": "1.Which type of appliance uses microwaves to cook food quickly and efficiently?",
         "options": [
-            " London",
-            " Paris",
-            " Madrid",
-            " Rome",
-            " Jupiter"
+            " Convection oven",
+            " Toaster oven",
+            " Microwave oven",
+            " Slow cooker"
         ],
-        "answer": "B"
+        "answer": "C"
     },
     {
-        "stem": "2. Which planet is known as the Red Planet?",
+        "stem": "2.Which type of appliance is used to clean clothes and other fabrics?",
         "options": [
-            " Jupiter",
-            " Mars",
-            " Saturn",
-            " Venus"
+            " Dishwasher",
+            " Blender",
+            " Clothes dryer",
+            " Washing machine"
         ],
-        "answer": "B"
+        "answer": "D"
+    },
+    {
+        "stem": "3.Which type of appliance is used to keep food and drinks cold and fresh?",
+        "options": [
+            " Microwave",
+            " Oven",
+            " Refrigerator",
+            " Stove"
+        ],
+        "answer": "C"
     }
 ]

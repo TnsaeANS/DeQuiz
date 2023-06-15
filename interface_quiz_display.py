@@ -2,14 +2,29 @@ import tkinter as tk
 import customtkinter as ctk
 from tkinter. messagebox import askyesno
 from question_model import Question
-from data import question_data
+
 from tkinter import messagebox
 
-# Print the options of the first question from the question_data list
-print(question_data[0]["options"])
+#from data.py
+from data import question_data
 
-# Create a question_bank list using list comprehension(this is a list of question objects with there own stem, opiton and answers)
+import json
+with open('quiz_data.json', 'r') as f:
+    quiz_data = json.load(f)
+
+# Testing validity
+# print(question_data[0]["options"])
+# print(quiz_data[1]["options"])
+
+#TESTING Deconstruction
 question_bank = [Question(question["stem"], question["answer"], question["options"]) for question in question_data]
+json_question_bank = [Question(question["stem"], question["answer"], question["options"]) for question in quiz_data[1:]]
+
+
+# wrap around - REPLACMENT
+question_bank = json_question_bank
+question_data = quiz_data[1:]
+
 
 # Create a class called MyQz
 class MyQz:
@@ -29,25 +44,53 @@ class MyQz:
         ctk.set_default_color_theme("blue")
         self.root = ctk.CTk()
         self.root.geometry('1000x600')
-        self.root.title("DeQuiz")
+        self.root.title("DeQuiz")       
 
-        # Creating a question frame and displaying the question
-        self.quesion_frame = ctk.CTkFrame(self.root ,width=500, height=220)
+                # Create a frame for the drop-down menu and add it to the root window
+        dropdown_frame = ctk.CTkFrame(self.root, width=500, height=50)
+        dropdown_frame.pack(side='top', padx=50, pady=10)
+
+        # Create a variable to store the selected value of the drop-down menu
+        dropdown_var = ctk.StringVar()
+
+        # Define a function to handle changes to the drop-down menu
+        def dropdown_callback(*args):
+            print("Selected option:", dropdown_var.get())
+
+        # Create the drop-down menu and add it to the dropdown frame
+        dropdown = ctk.CTkOptionMenu(dropdown_frame, variable=dropdown_var, command=dropdown_callback,
+                                    values=["Option 1", "Option 2", "Option 3"])
+        dropdown.pack(side='left', padx=10, pady=10) 
+
+
+        self.quesion_frame = ctk.CTkFrame(self.root, width=500, height=220)
         self.question_label = ctk.CTkLabel(self.quesion_frame, text=current_question.text)
         self.quesion_frame.pack(padx=50, pady=50)
         self.quesion_frame.pack_propagate(0)
         self.question_label.pack(padx=10, pady=10)
-       
+
+        # Create a frame for buttons with a width of 200 pixels
         button_frame = ctk.CTkFrame(self.root, width=200)
 
-        # Displaying each choice
+        # Create a variable to keep track of the state of the radio buttons
         self.check_option_state = ctk.IntVar()
 
         for item_num, choice in enumerate(question_data[self.qst_num]["options"]):
-            self.option_btn = ctk.CTkRadioButton(self.quesion_frame, value=item_num + 1, text=choice, variable=self.check_option_state)
+            # Create a radio button for the current choice
+            self.option_btn = ctk.CTkRadioButton(self.quesion_frame, 
+                value=item_num + 1, 
+                text=choice,
+                variable=self.check_option_state)
+
+            # Pack the radio button into the question frame with a padding of 10 pixels on each side
             self.option_btn.pack(padx=10, pady=10)
+
+            # Add the radio button to the list of options for the current question
             self.options.append(self.option_btn)
 
+
+
+        #LEFT and RIGHT Buttons
         self.btn_next = ctk.CTkButton(button_frame, text="Next", command=self.next_question)
         self.btn_next.pack(side=ctk.RIGHT, padx=10, pady=10)
 
@@ -61,10 +104,7 @@ class MyQz:
 
 
         # Displaying item number buttons
-
-
         self.item_button_frame = ctk.CTkFrame(self.root)
-
         for item_num in range(len(question_bank)):
             self. item_number_btn = ctk.CTkButton(self.item_button_frame, text=item_num+1 , width=20, height=20, 
                              command =  lambda jn=item_num : self.jumpto_question(jn)
