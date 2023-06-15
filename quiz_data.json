@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Mira"
+    },
+    {
+        "stem": "1. What is the capital of France?B ",
+        "options": [
+            " London",
+            " Paris",
+            " Madrid",
+            " Rome",
+            " Jupiter"
+        ],
+        "answer": "B"
+    },
+    {
+        "stem": "2. Which planet is known as the Red Planet?",
+        "options": [
+            " Jupiter",
+            " Mars",
+            " Saturn",
+            " Venus"
+        ],
+        "answer": "B"
+    }
+]
