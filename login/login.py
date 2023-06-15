@@ -29,7 +29,6 @@ cur.execute("""
     )
 """)
 
-
 def register():
     # Get the values entered by the user in the GUI entry fields
     fullname = fullname_entry.get()
@@ -104,6 +103,8 @@ def login():
 
 login_frame = None
 register_frame = None 
+
+is_teacher_state = None
         
 def display_login():
     global register_frame
@@ -153,6 +154,7 @@ def display_register():
     password_entry = ctk.CTkEntry(register_frame, width=200, height=30, placeholder_text="Password", show = "*")
     password_entry.pack(padx = 10, pady=5)
 
+    global is_teacher_state
     is_teacher_state = ctk.IntVar()
     teacher_btn = ctk.CTkCheckBox(register_frame, text="Teacher", variable=is_teacher_state)
     teacher_btn.pack(padx = 10, pady = 5)
