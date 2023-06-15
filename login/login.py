@@ -31,6 +31,9 @@ cur.execute("""
 
 def register():
     # Get the values entered by the user in the GUI entry fields
+    global fullname_entry
+    global password_entry
+    
     fullname = fullname_entry.get()
     password = password_entry.get()
     is_teacher = is_teacher_state.get()
@@ -134,6 +137,8 @@ def display_login():
     go_signin_label = ctk.CTkButton(login_frame,  text = "Register", cursor = "hand2", hover_color = "blue", command=display_register)
     go_signin_label.pack(padx = 10, pady=50)
 
+
+
 def display_register():
 
     global login_frame  # use the global keyword to access the global login_frame variable
@@ -148,9 +153,12 @@ def display_register():
     signup_label = ctk.CTkLabel(register_frame,  text = "Create An Account")
     signup_label.pack( padx = 10, pady=10)
 
+    #declared it global
+    global fullname_entry
     fullname_entry = ctk.CTkEntry(register_frame, width=200, height=30, placeholder_text="Full_name")
     fullname_entry.pack(padx = 10, pady=5)
 
+    global password_entry
     password_entry = ctk.CTkEntry(register_frame, width=200, height=30, placeholder_text="Password", show = "*")
     password_entry.pack(padx = 10, pady=5)
 
